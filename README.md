@@ -21,22 +21,22 @@ O projeto é gerenciado com Terraform, seguindo as melhores práticas de organiz
 
 ```
 .
-├── .gitignore
-├── lambda/
-│   └── authorizer.js
 ├── local-dev/
 │   ├── docker-compose.yml
 │   ├── setup.sh
 │   └── test.sh
+├── src/
+│   └── authorizer.js
+├── terraform/
+│   ├── .terraform.lock.hcl
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── provider.tf
+│   ├── terraform.tf
+│   └── variables.tf
+├── .gitignore
 ├── package.json
-├── package-lock.json
-└── terraform/
-    ├── .terraform.lock.hcl
-    ├── main.tf
-    ├── outputs.tf
-    ├── provider.tf
-    ├── terraform.tf
-    └── variables.tf
+└── package-lock.json
 ```
 
 ## 🚀 Pré-requisitos
@@ -54,9 +54,11 @@ Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
 Para provisionar a função Lambda em um ambiente AWS real, siga os passos abaixo.
 
 1. Configurar Credenciais AWS
+
 Certifique-se de que suas credenciais da AWS estejam configuradas corretamente no seu ambiente (ex: via `aws configure` ou variáveis de ambiente).
 
 2. Instalar Dependências Node.js
+
 Na raiz do projeto, instale a dependência `jsonwebtoken`:
 
 ```
@@ -64,6 +66,7 @@ npm install
 ```
 
 3. Inicializar o Terraform
+
 Navegue até a pasta de infraestrutura e inicialize o Terraform. Isso irá baixar os providers necessários e configurar o backend S3.
 
 ```
@@ -72,6 +75,7 @@ terraform init
 ```
 
 4. Revisar e Aplicar
+
 Revise o plano de execução para entender quais recursos serão criados.
 
 ```
@@ -91,6 +95,7 @@ Ao final da execução, o ARN da Lambda será exibido como um output.
 Para desenvolver e testar a função Lambda localmente sem custos, utilize o ambiente LocalStack.
 
 1. Iniciar o Ambiente
+
 Navegue até a pasta `local-dev` e inicie os contêineres do LocalStack.
 
 ```
@@ -105,6 +110,7 @@ Este script irá:
     3. Criar a função Lambda no ambiente LocalStack usando `awslocal`.
 
 2. Executar os Testes
+
 Após o ambiente estar pronto, execute o script de teste para invocar a Lambda localmente com tokens JWT válidos e inválidos.
 
 ```
@@ -116,6 +122,7 @@ O script usará `awslocal` para invocar a função e exibirá as respostas de po
 ## ⚙️ Configuração do Terraform
 
 ### Variáveis
+
 As variáveis de configuração estão definidas em `terraform/variables.tf`. As principais são:
 
 - `aws_region`: Região da AWS onde os recursos serão provisionados. Default: `us-east-1`.
@@ -123,6 +130,7 @@ As variáveis de configuração estão definidas em `terraform/variables.tf`. As
 - `lambda_role_arn`: ARN da IAM Role que a Lambda usará. Este valor é fixo para o ambiente de laboratório da AWS Academy, mas pode ser sobrescrito se necessário.
 
 ### Outputs
+
 O projeto expõe um output principal em `terraform/outputs.tf`:
 
 - `lambda_authorizer_arn`: O ARN completo da função Lambda criada. Este valor é essencial para ser consumido por outros projetos de infraestrutura (como a configuração de um API Gateway) através do `terraform_remote_state`.
