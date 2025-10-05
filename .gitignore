@@ -1,0 +1,73 @@
+# ===================================================================
+# Arquivos e diretórios gerados pelo Terraform
+# ===================================================================
+# Pasta de cache local do Terraform
+.terraform/
+
+# Arquivos de estado locais (embora você use backend S3, é bom prevenir)
+terraform.tfstate
+terraform.tfstate.backup
+
+# Arquivos de plano de execução. Podem conter informações sensíveis.
+*.tfplan
+
+# Arquivos de variáveis que não devem ser versionados (ex: segredos)
+*.tfvars
+*.tfvars.json
+
+# Arquivos de log de crash do Terraform
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+
+# ===================================================================
+# Arquivos gerados pelo Node.js / npm
+# ===================================================================
+# Dependências locais
+node_modules/
+
+# Arquivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Pacote .zip gerado para a Lambda
+dist/
+
+
+# ===================================================================
+# Arquivos do ambiente de desenvolvimento local
+# ===================================================================
+# Arquivos de estado e cache do LocalStack
+.localstack/
+
+# Arquivos temporários gerados pelos scripts de teste
+output.json
+/tmp/authorizer.zip
+
+
+# ===================================================================
+# Arquivos de sistema operacional (macOS, Windows, Linux)
+# ===================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ===================================================================
+# Arquivos de IDEs e editores de código
+# ===================================================================
+.idea/
+.vscode/
+*.swp
+*~
