@@ -4,18 +4,18 @@ Este repositório contém o código-fonte e a infraestrutura como código (IaC) 
 
 O projeto é gerenciado com Terraform, seguindo as melhores práticas de organização de código, gerenciamento de estado remoto e um ambiente de desenvolvimento local isolado com LocalStack e Docker.
 
----
+
 
 ## ✨ Features
 
--   **Infraestrutura como Código (IaC):** Todo o provisionamento da AWS Lambda é gerenciado declarativamente com [Terraform](https://www.terraform.io/).
+-   **Infraestrutura como Código (IaC):** Todo o provisionamento da AWS Lambda é gerenciado declarativamente com `Terraform`.
 -   **Código Organizado:** O código Terraform é modularizado em arquivos lógicos (`main.tf`, `variables.tf`, `outputs.tf`, etc.) dentro de um diretório dedicado `terraform/`.
 -   **Gerenciamento de Estado Remoto:** O estado do Terraform é armazenado de forma segura e centralizada em um bucket AWS S3, permitindo o trabalho em equipe e a execução em esteiras de CI/CD.
 -   **Desenvolvimento Local:** Um ambiente de desenvolvimento completo e isolado pode ser iniciado com um único comando usando Docker e LocalStack.
 -   **Testes Locais:** Inclui scripts para implantar e testar a função Lambda no ambiente LocalStack, agilizando o ciclo de desenvolvimento.
 -   **Dependency Locking:** Utiliza `package-lock.json` para as dependências Node.js e `.terraform.lock.hcl` para os providers Terraform, garantindo builds consistentes e reprodutíveis.
 
----
+
 
 ## 📂 Estrutura do Projeto
 
@@ -39,7 +39,7 @@ O projeto é gerenciado com Terraform, seguindo as melhores práticas de organiz
 └── package-lock.json
 ```
 
----
+
 
 ## 🚀 Pré-requisitos
 
@@ -51,17 +51,17 @@ Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
 - Docker e Docker Compose
 - awslocal (wrapper da AWS CLI para LocalStack)
 
----
+
 
 ## ☁️ Deployment na AWS
 
 Para provisionar a função Lambda em um ambiente AWS real, siga os passos abaixo.
 
-1. Configurar Credenciais AWS
+### 1. Configurar Credenciais AWS
 
 Certifique-se de que suas credenciais da AWS estejam configuradas corretamente no seu ambiente (ex: via `aws configure` ou variáveis de ambiente).
 
-2. Instalar Dependências Node.js
+### 2. Instalar Dependências Node.js
 
 Na raiz do projeto, instale a dependência `jsonwebtoken`:
 
@@ -69,7 +69,7 @@ Na raiz do projeto, instale a dependência `jsonwebtoken`:
 npm install
 ```
 
-3. Inicializar o Terraform
+### 3. Inicializar o Terraform
 
 Navegue até a pasta de infraestrutura e inicialize o Terraform. Isso irá baixar os providers necessários e configurar o backend S3.
 
@@ -78,7 +78,7 @@ cd terraform/
 terraform init
 ```
 
-4. Revisar e Aplicar
+### 4. Revisar e Aplicar
 
 Revise o plano de execução para entender quais recursos serão criados.
 
@@ -94,13 +94,13 @@ terraform apply
 
 Ao final da execução, o ARN da Lambda será exibido como um output.
 
----
+
 
 ## 💻 Desenvolvimento Local com LocalStack
 
 Para desenvolver e testar a função Lambda localmente sem custos, utilize o ambiente LocalStack.
 
-1. Iniciar o Ambiente
+### 1. Iniciar o Ambiente
 
 Navegue até a pasta `local-dev` e inicie os contêineres do LocalStack.
 
@@ -115,7 +115,7 @@ Este script irá:
     2. Compactar o código da Lambda em um arquivo `.zip`.
     3. Criar a função Lambda no ambiente LocalStack usando `awslocal`.
 
-2. Executar os Testes
+### 2. Executar os Testes
 
 Após o ambiente estar pronto, execute o script de teste para invocar a Lambda localmente com tokens JWT válidos e inválidos.
 
@@ -125,7 +125,7 @@ sh test.sh
 
 O script usará `awslocal` para invocar a função e exibirá as respostas de política (`Allow`/`Deny`) no console.
 
----
+
 
 ## ⚙️ Configuração do Terraform
 
