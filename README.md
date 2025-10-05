@@ -39,6 +39,8 @@ O projeto é gerenciado com Terraform, seguindo as melhores práticas de organiz
 └── package-lock.json
 ```
 
+---
+
 ## 🚀 Pré-requisitos
 
 Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
@@ -48,6 +50,8 @@ Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
 - Node.js (>= 18.x)
 - Docker e Docker Compose
 - awslocal (wrapper da AWS CLI para LocalStack)
+
+---
 
 ## ☁️ Deployment na AWS
 
@@ -90,6 +94,8 @@ terraform apply
 
 Ao final da execução, o ARN da Lambda será exibido como um output.
 
+---
+
 ## 💻 Desenvolvimento Local com LocalStack
 
 Para desenvolver e testar a função Lambda localmente sem custos, utilize o ambiente LocalStack.
@@ -118,6 +124,8 @@ sh test.sh
 ```
 
 O script usará `awslocal` para invocar a função e exibirá as respostas de política (`Allow`/`Deny`) no console.
+
+---
 
 ## ⚙️ Configuração do Terraform
 
