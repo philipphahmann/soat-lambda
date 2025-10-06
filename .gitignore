@@ -71,3 +71,6 @@ desktop.ini
 .vscode/
 *.swp
 *~
+
+# Ignore RSA key files under resources
+/src/main/resources/rsa/
