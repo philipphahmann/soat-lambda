@@ -1,9 +1,18 @@
 # Gera o arquivo .zip a partir do código-fonte da Lambda
 data "archive_file" "authorizer_zip" {
   type = "zip"
-  # O path agora precisa "voltar" um nível para achar a pasta lambda
-  source_file = "${path.module}/../src/authorizer.js"
+  
+  source_dir  = "${path.module}/../"
   output_path = "${path.module}/../dist/authorizer.zip"
+
+  excludes = [
+    ".git",
+    ".github",
+    "local-dev",
+    "terraform",
+    ".DS_Store",
+    "README.md"
+  ]
 }
 
 # Cria o recurso da função Lambda na AWS
