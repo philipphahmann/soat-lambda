@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Lambda Authorizer para validar JWT com RS256 e JWKS remoto (.well-known/jwks.json)",
   "main": "authorizer.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"No tests configured\""
   },
