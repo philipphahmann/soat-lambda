@@ -4,11 +4,10 @@ Este repositório contém o código-fonte e a infraestrutura como código (IaC) 
 
 O projeto é gerenciado com Terraform, seguindo as melhores práticas de organização de código, gerenciamento de estado remoto e um ambiente de desenvolvimento local isolado com LocalStack e Docker.
 
-
-
 ## ✨ Features
 
 -   **CI/CD Automatizado:** Pipeline completa que valida o build, planeja a infraestrutura em Pull Requests e faz o deploy automático na AWS após o merge para a branch `main`.
+-   **Gerenciamento Seguro de Chaves:** A chave pública para validação dos tokens JWT é armazenada e gerenciada de forma segura no AWS Secrets Manager, evitando chaves expostas em código ou configurações.
 -   **Branch Protegida:** A branch main é protegida, exigindo Pull Requests e a aprovação de todos os jobs da esteira antes do merge, garantindo estabilidade e segurança. 
 -   **Infraestrutura como Código (IaC):** Todo o provisionamento da AWS Lambda é gerenciado declarativamente com `Terraform`.
 -   **Código Organizado:** O código Terraform é modularizado em arquivos lógicos (`main.tf`, `variables.tf`, `outputs.tf`, etc.) dentro de um diretório dedicado `terraform/`.
@@ -16,8 +15,6 @@ O projeto é gerenciado com Terraform, seguindo as melhores práticas de organiz
 -   **Desenvolvimento Local:** Um ambiente de desenvolvimento completo e isolado pode ser iniciado com um único comando usando Docker e LocalStack.
 -   **Testes Locais:** Inclui scripts para implantar e testar a função Lambda no ambiente LocalStack, agilizando o ciclo de desenvolvimento.
 -   **Dependency Locking:** Utiliza `package-lock.json` para as dependências Node.js e `.terraform.lock.hcl` para os providers Terraform, garantindo builds consistentes e reprodutíveis.
-
-
 
 ## 📂 Estrutura do Projeto
 
@@ -75,7 +72,8 @@ Para que a pipeline possa se autenticar na AWS, você deve configurar os seguint
 2. Clique em New repository secret e adicione os seguintes secrets:
    - `AWS_ACCESS_KEY_ID`: O Access Key ID do seu usuário IAM.
    - `AWS_SECRET_ACCESS_KEY`: O Secret Access Key correspondente.
-    - `AWS_SESSION_TOKEN` (Opcional): Necessário se você estiver usando credenciais temporárias.
+   - `AWS_SESSION_TOKEN` (Opcional): Necessário se você estiver usando credenciais temporárias.
+   - `PUBLIC_KEY_SECRET_NAME`: O nome/ARN do segredo no AWS Secrets Manager que contém a chave pública (ex: `soat/jwt-public-key`).
 
 ## 🚀 Pré-requisitos
 
@@ -166,6 +164,7 @@ As variáveis de configuração estão definidas em `terraform/variables.tf`. As
 - `aws_region`: Região da AWS onde os recursos serão provisionados. Default: `us-east-1`.
 - `project_name`: Prefixo usado para nomear os recursos. Default: `soat`.
 - `lambda_role_arn`: ARN da IAM Role que a Lambda usará. Este valor é fixo para o ambiente de laboratório da AWS Academy, mas pode ser sobrescrito se necessário.
+-  `public_key_secret_name`: O nome do segredo no AWS Secrets Manager que contém a chave pública.
 
 ### Outputs
 

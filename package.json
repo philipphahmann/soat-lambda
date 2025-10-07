@@ -2,13 +2,13 @@
   "name": "jwt-authorizer",
   "version": "1.0.0",
   "description": "Lambda Authorizer para validar JWT com RS256 e JWKS remoto (.well-known/jwks.json)",
-  "main": "authorizer.js",
+  "main": "src/authorizer.js",
   "scripts": {
     "test": "echo \"No tests configured\""
   },
   "dependencies": {
-    "jsonwebtoken": "^9.0.2",
-    "jwks-rsa": "^3.1.0"
+    "@aws-sdk/client-secrets-manager": "^3.577.0",
+    "jsonwebtoken": "^9.0.2"    
   },
   "engines": {
     "node": ">=18.0.0"

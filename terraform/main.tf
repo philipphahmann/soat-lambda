@@ -19,10 +19,16 @@ data "archive_file" "authorizer_zip" {
 resource "aws_lambda_function" "authorizer" {
   function_name    = "${var.project_name}-authorizer"
   role             = var.lambda_role_arn
-  handler          = "authorizer.handler"
+  handler          = "src/authorizer.handler"
   runtime          = "nodejs18.x"
   filename         = data.archive_file.authorizer_zip.output_path
   source_code_hash = data.archive_file.authorizer_zip.output_base64sha256
+
+  environment {
+    variables = {
+      PUBLIC_KEY_SECRET_NAME = var.public_key_secret_name
+    }
+  }
 
   tags = {
     Project = var.project_name
