@@ -1,8 +1,8 @@
 # Gera o arquivo .zip a partir do código-fonte da Lambda
 data "archive_file" "authorizer_zip" {
   type = "zip"
-  # O path agora precisa "voltar" um nível para achar a pasta lambda
-  source_file = "${path.module}/../"
+  
+  source_dir  = "${path.module}/../"
   output_path = "${path.module}/../dist/authorizer.zip"
 
   excludes = [
